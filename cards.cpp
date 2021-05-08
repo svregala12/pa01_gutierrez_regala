@@ -25,21 +25,6 @@ CardList::~CardList()
     }
 }
 
-/*
-void CardList::printInOrder() 
-{
-    Card* n = head;
-    while (n) {
-        cout << n -> data;
-        if (n -> next) {
-            cout << endl;
-        }
-        n = n -> next;
-    }
-    cout << endl;
-}
-*/
-
 void CardList::insertCard(string value)
 {
     if (!head)
@@ -126,10 +111,6 @@ void CardList::deleteCardHelper(Card* pred, string value)
 
 bool CardList::operator==(const CardList rhs) const {
     return (head -> data == rhs.head -> data);
-}
-
-string CardList::getName() {
-    return name;
 }
 
 // - return certain functions we want to call for the game to complete

@@ -24,9 +24,6 @@ class CardList {
         // destructor
         ~CardList();
 
-        // print the remaining cards left
-        void printInOrder();
-
         // insert
         void insertCard(string value);
 
@@ -36,7 +33,6 @@ class CardList {
         // delete
         void deleteCard(string value);
         void deleteCardHelper(Card* temp, string value);
-        void del(Card* before_del);
 
         // operator <<
         friend std::ostream& operator<<(std::ostream& os, const CardList& input) {
@@ -56,9 +52,6 @@ class CardList {
 
         // operator ==
         bool operator==(const CardList rhs) const;
-
-        //get name
-        string getName();
 
     private:
         string name;
