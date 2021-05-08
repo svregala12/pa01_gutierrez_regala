@@ -1,5 +1,5 @@
 // cards.cpp
-// Authors: Steve Regala | Angel Gutierrez | 5/3/21
+// Authors: Steve Regala | Angel Gutierrez | 5/8/21
 // Implementation of the classes defined in cards.h
 
 #include "cards.h"
@@ -25,6 +25,7 @@ CardList::~CardList()
     }
 }
 
+/*
 void CardList::printInOrder() 
 {
     Card* n = head;
@@ -37,6 +38,7 @@ void CardList::printInOrder()
     }
     cout << endl;
 }
+*/
 
 void CardList::insertCard(string value)
 {
@@ -64,9 +66,6 @@ void CardList::insertCard(string value)
 
 bool CardList::searchMatch(CardList& value1, CardList& value2) const{
 
-    // this - pointer to the current thing
-    // this -> deleteCard(this -> data);
-
     Card* n1 = value1.head;
     Card* n2 = value2.head;
 
@@ -74,85 +73,64 @@ bool CardList::searchMatch(CardList& value1, CardList& value2) const{
 
         while (n2) {
 
-            if (n1-> data == n2 -> data)
+            if (n1->data == n2->data)
             {
-                cout << value1 << endl;
+                cout << value1.name << " picked matching card " << n1->data << endl;
                 value1.deleteCard(n1 -> data);
                 value2.deleteCard(n2 -> data);
                 return true;
             }
             n2 = n2 -> next;
-            cout << "Wowow" << endl;
 
         }
+        n2 = value2.head;
         n1 = n1 -> next;
-        cout << "Okoko" << endl;
     }
 
     return false;
 }
 
-void CardList::deleteCard(string value) {
-    deleteCardHelper(this -> head, value);
+void CardList::deleteCard(string value)
+{    
+    Card* current = this -> head;
+    Card* pred;
+    
+    if(current -> data == value)
+    {
+        this -> head = current -> next;
+        delete current;
+    }
+
+    else
+    {
+        while (current)
+        {
+            if (current -> next -> data == value)
+            {
+            pred = current;
+            break;
+            }
+            current = current -> next;
+        }
+        deleteCardHelper(pred, value);
+    }
 }
 
-void CardList::deleteCardHelper(Card* temp, string value) {
-
-    if (!temp) return;
-
-    if ( (temp -> data == value) ) 
-    {
-        head = head -> next;
-        delete temp;
-    }
-
-    else {
-        temp = temp -> next;
-        deleteCardHelper(temp, value);
-    }
+void CardList::deleteCardHelper(Card* pred, string value) 
+{
+    Card* temp;
+    temp = pred -> next;
+    pred -> next = temp -> next;
+    delete temp;
 }
 
 bool CardList::operator==(const CardList rhs) const {
     return (head -> data == rhs.head -> data);
 }
 
-
-int CardList::countCards() {
-
-    Card* n = head;
-    int count(0);
-
-    while (n) 
-    {
-        count++;
-        n = n-> next;
-    }
-
-    return count;
-}
-
 string CardList::getName() {
     return name;
 }
-
-
-
-/*
-void CardList::startGame(CardList Player1, CardList Player2) {
-
-    
-    if (searchMatch(Player1, Player2))
-    {
-        CardList temp = Player1;
-        Player1 = Player2;
-        Player2 = temp;
-        startGame(Player1, Player2);
-    }
-    
-
-}
-*/
-
 
 // - return certain functions we want to call for the game to complete
 
@@ -172,7 +150,5 @@ StartGame
     - Repeat this process until both people don't have any matching cards left
 
     - Print Alice's hand, then print Bob's
-
-
 
 */

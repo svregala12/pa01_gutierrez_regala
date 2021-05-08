@@ -1,30 +1,12 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-//#include "cards.h"
+#include "cards.h"
 #include "cards.cpp"
 
 using namespace std;
 
-// start the game function
-void startGame(CardList Player1, CardList Player2) {
-  
-  if (Player1.searchMatch(Player1, Player2)) {
-    return startGame(Player2, Player1);
-    // Player2.searchMatch(Player1)
-  }
-
-  else {
-
-    cout << endl << Player1.getName() << "'s cards:" << endl; 
-    Player1.printInOrder();
-
-    cout << endl << Player2.getName() << "'s cards:" << endl;
-    Player2.printInOrder();
-
-  }
-
-}
+void startGame(CardList& Player1, CardList& Player2, int count);
 
 int main(int argv, char** argc){
   if(argv != 3){
@@ -73,18 +55,47 @@ int main(int argv, char** argc){
   cardFile2.close();
 
   // Start the game
-  cout << "hello" << endl;
-  //Player1.startGame(Player1, Player2);
-  //Player1.printInOrder();
-  //Player1.deleteCard("h 3");
-  //Player1.searchMatch(Player1, Player2);
-  cout << "goodbye" << endl;
-  //Player1.printInOrder();
-  //cout << Player1.countCards() << endl;
-  //cout << Player1 << endl;
-
-  startGame(Player1,Player2);
-  
+  int count(0);
+  startGame(Player1,Player2, count);  
 
   return 0;
+}
+
+void startGame(CardList& Player1, CardList& Player2, int count)
+{  
+
+  if(Player1.searchMatch(Player1, Player2))
+  {
+    count++;
+    return startGame(Player2, Player1, count);
+  }
+
+  else{
+    
+    if(count % 2 == 0)
+    {
+      cout << Player1;
+      cout << Player2;
+      /*
+      cout<<endl<<Player1.getName()<<"'s cards:"<<endl;
+      Player1.printInOrder();
+      cout<<endl<<Player2.getName()<<"'s cards:"<<endl;
+      Player2.printInOrder();
+      */
+      
+    }
+
+    else
+    {
+      cout << Player2;
+      cout << Player1;
+      /*
+      cout<<endl<<Player2.getName()<<"'s cards:"<<endl;
+      Player2.printInOrder();
+      cout<<endl<<Player1.getName()<<"'s cards:"<<endl;
+      Player1.printInOrder();
+      */
+    }
+  }
+
 }

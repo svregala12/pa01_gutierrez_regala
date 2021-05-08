@@ -12,4 +12,3 @@ testcards: testcards.o cards.o
 
 clean:
 	rm -f game testcards *.o
-

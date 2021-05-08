@@ -51,11 +51,13 @@ void test_append_single_element_list(){
     // small, fast, orthogonal (test for different cases)
 
 }
+
 void test_equal_empty_list(){ 
   string testname = "case 0: [], []";
   LinkedList l1, l2;
   assertEquals(l1.head,l2.head);
 }
+
 
 void test_card_operator_double_equal(){
   // Test to check if == is overloaded for card

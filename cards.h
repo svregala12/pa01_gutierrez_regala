@@ -36,19 +36,26 @@ class CardList {
         // delete
         void deleteCard(string value);
         void deleteCardHelper(Card* temp, string value);
+        void del(Card* before_del);
 
         // operator <<
         friend std::ostream& operator<<(std::ostream& os, const CardList& input) {
-           Card* n = input.head;
-           os << input.name << " picked matching card " << n -> data;
-           return os;
+            Card* n = input.head;
+            os << endl << input.name << "'s card: " << endl;
+            while (n) 
+            {
+                os << n -> data;
+                if (n -> next) {
+                   os << endl;
+                }
+                n = n -> next;
+            }
+            os << endl;
+            return os;
         }
 
         // operator ==
         bool operator==(const CardList rhs) const;
-
-        // get the count of nodes of each player
-        int countCards();
 
         //get name
         string getName();
