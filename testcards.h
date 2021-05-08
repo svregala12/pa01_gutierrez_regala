@@ -1,137 +1,67 @@
-//cards.h
-//Authors: Angel Gutierrez | Steve Regala | 5/6/21
-//All class declarations go here
+// testcards.h
+//Authors: Angel Gutierrez | Steve Regala | 5/8/21
+//All test declarations go here
 
-#ifndef CARDS_H
-#define CARDS_H
+// This is not exhaustive list of tests. You can remove / edit tests if it doesn't suit your design but you should definitelty add more
+// You should test all possible cornere cases of your public functions
+
+#ifndef TESTCARDS_H
+#define TESTCARDS_H
 
 #include <iostream>
+
 using namespace std;
+void runAll();
+void test_constructor();
+void test_append();
+void test_equal();
+void test_card();
+/*
+void test_destructor();
+void test_remove();
+void test_search();
 
-struct Card 
-{
-    string data;
-    Card* next;
-};
+*/
+void test_append_empty_list(); // A test case for append
+void test_append_single_element_list(); // Tests cases should be independent,
+            // small, fast, orthogonal
+void test_equal_empty_list();
+void test_card_operator_double_equal();
 
+void START_TEST(string testname){
+  cout<<"Start "<<testname<<endl;
+}
 
-class CardList {
+void END_TEST(string testname) {
+  cout<<"End "<<testname<<endl<<endl;
+}
 
-    public:
-        // constructor --> initialize head to NULL and initialize name
-        CardList(string value);
+void assertEquals(string expected, string actual, string testDescription){
+  if (expected == actual) {
+    cout<<"PASSED " << endl;
+  } else {
+    cout<< "  FAILED: "<< testDescription << endl <<"   Expected: "<< expected << " Actual: " << actual << endl;
+  }
+}
 
-        // destructor
-        ~CardList();
+void assertEquals(int expected, int actual, string testDescription){
+  if (expected == actual) {
+    cout<<"PASSED " << endl;
+  } else {
+    cout<< "  FAILED: "<< testDescription << endl <<"   Expected: "<< expected << " Actual: " << actual << endl;
+  }
+}
 
-        // print the remaining cards left
-        void printInOrder();
-
-        // insert
-        void insertCard(string value);
-
-        // search
-        bool searchMatch(CardList& value1, CardList& value2) const;
-
-        // delete
-        void deleteCard(string value);
-        void deleteCardHelper(Card* temp, string value);
-        void del(Card* before_del);
-
-        // operator <<
-        friend std::ostream& operator<<(std::ostream& os, const CardList& input) {
-            Card* n = input.head;
-            os << endl << input.name << "'s card: " << endl;
-            while (n) 
-            {
-                os << n -> data;
-                if (n -> next) {
-                   os << endl;
-                }
-                n = n -> next;
-            }
-            os << endl;
-            return os;
-        }
-
-        // operator ==
-        bool operator==(const CardList rhs) const;
-
-        //get name
-        string getName();
-
-    private:
-        string name;
-        Card* head;
-        //void clear(Card* n);
-};
-
+// You should add more assertEquals function for your classes. For example, Node/Card class
+/*
+void assertEquals(Node *expected, Node *actual, string testDescription){
+  if (expected == actual) {
+    cout<<"PASSED " << endl;
+  } else {
+    cout<< "  FAILED: "<< testDescription << endl <<"   Expected: "<< expected << " Actual: " << actual << endl;
+  }
+}
+*/
 
 
 #endif
-
-// Use this file to define all your classes and public functions
-// You should design your program with OOP principles using classes
-// An example of class design would be having Card, CardList and Player as Classes.
-// Card represent Node in your LinkedList which has some data in it
-// CardList can be your LinkedList Class which has operations such as append, remove etc
-// Player class represents your game player
-// Think about the public functions that should be part of each class. (All public function need to be tested in unit testing)
-// One of the important functions is search / find which is essential for players to find cars in their opponent's "hand"
-// Make sure you overload the desired operators
-// This is not the fixed design. We are not expecting exactly 3 classes. You can do with less or more.
-// Important thing to consider is abstraction.
-
-/*
-
-To-do's:
-
-- How many classes would we need? --> possibly 2
-    - Card class and CardList
-
-- Card struct/class (LinkedList) --> this is the NODE
-    - first card --> head of the linkedlist
-    - last card --> tail of the LL
-    - next pointer to traverse through the list
-    - a Node struct inside the class that consists of "int data" and "Node* next"
-
-    - functions (public)
-        - constructor
-        - destructor
-        - Two overloaded operators
-            - << and ==
-
-
-- CardList Class
-    - within this class, there is the struct called Card
-    - insert function
-    - search function
-    - delete function
-
-- Player Class?
-
-
-
-Questions
-    - Is our approach appropriate (2 classes, 1 struct inside a class)
-    - What's the point of the overload operator, elaborate on this please, both << and ==
-    - How are we supposed to store each card into a node, since each card is either (1) number/number or (2) number/letter
-        - Could we possibly treat each card as a string, regardless of the integer value?
-    - Is Card a class
-
-    - Our design would be 2 classes: Cardlist and Player (Card struct within Cardlist)
-        - How would the two classes interact?
-        - Possibility: Have an overall class: Player. And inside the Cardlist
-    
-    - Clarify on what they mean when they say to have multiple classes --> how would they interact?
-
-*/
-
-/* player class 
-    - would use the interface created for it to play the game
-    - use the container of cards to play the game
-    - represents the deck of cards in your hands
-    - user/player -> container of the cards
-    - class that would use cardlist and card to play the game
-    - Player that owns the hand of cards
-*/
