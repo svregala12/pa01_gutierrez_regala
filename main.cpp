@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include "cards.h"
-#include "cards.cpp"
+//#include "cards.cpp"
 
 using namespace std;
 
@@ -76,25 +76,12 @@ void startGame(CardList& Player1, CardList& Player2, int count)
     {
       cout << Player1;
       cout << Player2;
-      /*
-      cout<<endl<<Player1.getName()<<"'s cards:"<<endl;
-      Player1.printInOrder();
-      cout<<endl<<Player2.getName()<<"'s cards:"<<endl;
-      Player2.printInOrder();
-      */
-      
     }
 
     else
     {
       cout << Player2;
       cout << Player1;
-      /*
-      cout<<endl<<Player2.getName()<<"'s cards:"<<endl;
-      Player2.printInOrder();
-      cout<<endl<<Player1.getName()<<"'s cards:"<<endl;
-      Player1.printInOrder();
-      */
     }
   }
 

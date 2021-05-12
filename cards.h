@@ -14,10 +14,13 @@ struct Card
     Card* next;
 };
 
-
 class CardList {
 
     public:
+
+        // default constructor
+        CardList();
+
         // constructor --> initialize head to NULL and initialize name
         CardList(string value);
 
@@ -37,7 +40,7 @@ class CardList {
         // operator <<
         friend std::ostream& operator<<(std::ostream& os, const CardList& input) {
             Card* n = input.head;
-            os << endl << input.name << "'s card: " << endl;
+            os << endl << input.name << "'s cards: " << endl;
             while (n) 
             {
                 os << n -> data;
@@ -51,15 +54,13 @@ class CardList {
         }
 
         // operator ==
-        bool operator==(const CardList rhs) const;
+        bool operator==(const CardList& rhs) const;
 
     private:
         string name;
         Card* head;
         //void clear(Card* n);
 };
-
-
 
 #endif
 
@@ -77,6 +78,7 @@ class CardList {
 
 /*
 
+OUTLINE OF WHAT WE NEED TO DO
 To-do's:
 
 - How many classes would we need? --> possibly 2

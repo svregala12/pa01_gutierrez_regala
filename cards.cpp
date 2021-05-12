@@ -7,6 +7,10 @@
 #include <string>
 using namespace std;
 
+CardList::CardList() {
+    name = "No Name";
+    head = NULL;
+}
 
 CardList::CardList(string value)
 {
@@ -53,6 +57,10 @@ bool CardList::searchMatch(CardList& value1, CardList& value2) const{
 
     Card* n1 = value1.head;
     Card* n2 = value2.head;
+
+    if (!(n1) || !(n2)) {
+        return false;
+    }
 
     while (n1) {
 
@@ -109,7 +117,7 @@ void CardList::deleteCardHelper(Card* pred, string value)
     delete temp;
 }
 
-bool CardList::operator==(const CardList rhs) const {
+bool CardList::operator==(const CardList& rhs) const {
     return (head -> data == rhs.head -> data);
 }
 
